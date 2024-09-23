@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
+const Config = require("config");
+const dbug = require("debug")("devlopment:mongoose");
 
-try {
-  const dbConnect = mongoose.connect(
-    "mongodb+srv://miniprojectUser:mini2551@cluster0.t3mxm.mongodb.net/SCATCH"
-  );
-  console.log("Connect", dbConnect);
-} catch (error) {
-  console.log(error);
-}
+mongoose
+  .connect(`${Config.get("MONGODB_URI")}/SCATCH`)
+  .then(() => {
+    dbug("Connected to MongoDB successfully");
+  })
+  .catch((error) => {
+    console.log("Failed to connect to MongoDB", error);
+  });
 
 module.exports = mongoose.connection;

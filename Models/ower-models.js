@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-
-
 const owerSchema = mongoose.Schema({
   fullName: {
     type: String,
@@ -14,9 +12,8 @@ const owerSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
-
   gstNumber: Number,
   picture: String,
 });
 
-module.exports = mongoose.module("Ower", owerSchema);
+module.exports = mongoose.model("Owner", owerSchema);

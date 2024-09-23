@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(
-  "mongodb+srv://miniprojectUser:mini2551@cluster0.t3mxm.mongodb.net/SCATCH"
-);
-
 const userSchema = mongoose.Schema({
   fullName: String,
   email: String,
@@ -12,9 +8,8 @@ const userSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
-  isAdmin: Boolean,
   contact: Number,
   picture: String,
 });
 
-module.exports = mongoose.module("User", userSchema);
+module.exports = mongoose.model("User", userSchema);
