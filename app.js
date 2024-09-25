@@ -7,16 +7,15 @@ const productsRoute = require("./Routes/productRouter");
 const usersRoute = require("./Routes/userRouter");
 const expressSession = require("express-session");
 const flash = require("connect-flash");
-require("dotenv").config();
 const indexRoute = require("./Routes/indexRouter");
 const dataBase = require("./Config/mongoose-connection");
+require("dotenv").config();
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "Public")));
 app.set("view engine", "ejs");
-
 
 app.use(
   expressSession({
