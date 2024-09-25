@@ -9,9 +9,8 @@ module.exports.registerUser = async (req, res) => {
 
     const user = await userModel.findOne({ email });
     if (user) {
-      return res.status(401).json({
-        message: "The user already exists",
-      });
+      req.flash("error", "The user already exists");
+      return res.status(401).redirect("/");
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -26,13 +25,7 @@ module.exports.registerUser = async (req, res) => {
     const token = generateToken(newUser);
     res.cookie("token", token);
 
-    res
-      .status(200)
-      .json({
-        ...newUser.toObject(),
-        message: "User Registered Successfully",
-      })
-      .redirect("/shop");
+    res.status(200).redirect("/shop");
   } catch (error) {
     console.log("Error in user creation", error);
     res.status(500).json({ message: "User registration failed", error });
