@@ -1,13 +1,13 @@
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../Utils/generateToken");
-const User = require("../Models/user-model");
 const cookieParser = require("cookie-parser");
+const userModel = require("../Models/user-model");
 
 module.exports.registerUser = async (req, res) => {
   try {
     const { email, password, fullName } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await userModel.findOne({ email });
     if (user) {
       return res.status(401).json({
         message: "The user already exists",
@@ -17,7 +17,7 @@ module.exports.registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await User.create({
+    const newUser = await userModel.create({
       email,
       password: hashedPassword,
       fullName,
@@ -39,8 +39,7 @@ module.exports.registerUser = async (req, res) => {
 module.exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    console.log(user);
+    const user = await userModel.findOne({ email });
 
     if (!user) res.status(404).json({ message: "Email or Password is worng" });
     else {

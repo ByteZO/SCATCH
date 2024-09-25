@@ -9,6 +9,7 @@ const expressSession = require("express-session");
 const flash = require("connect-flash");
 require("dotenv").config();
 const indexRoute = require("./Routes/indexRouter");
+const dataBase = require("./Config/mongoose-connection");
 
 app.use(express.json());
 app.use(cookieParser());
