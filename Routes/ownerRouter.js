@@ -17,7 +17,7 @@ Router.post("/create", async (req, res) => {
     const owner = await owerModels.find();
     req.flash("error", "You don't have permission to create a new owner");
     if (owner.length > 0) {
-      return res.status(503).redirect("/owners/owner_logIn");
+      return res.status(404).redirect("/owners/owner_logIn");
     }
     const { fullName, email, password } = req.body;
     const ownerCreated = await owerModels.create({
@@ -25,7 +25,6 @@ Router.post("/create", async (req, res) => {
       email,
       password,
     });
-    console.log(ownerCreated);
 
     return res
       .status(201)

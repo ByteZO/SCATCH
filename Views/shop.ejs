@@ -1,4 +1,10 @@
-<%- include('./partials/header') %>
+<%- include('./partials/header') %> <% if(success.length>0){ %>
+<div
+  class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500"
+>
+  <span class="inline-block mt-1 mb-1 text-white"> <%= success %> </span>
+</div>
+<% } %>
 <script src="https://cdn.tailwindcss.com"></script>
 <div class="w-full h-screen flex items-start px-20 py-20">
   <div class="w-[25%] flex h-screen flex-col items-start">
@@ -22,10 +28,10 @@
       <a class="block w-fit mb-2" href="">Discount</a>
     </div>
   </div>
-  <div class="w-[75%] flex flex-col gap-5 h-screen">
-    <div class="flex items-start gap-5">
+  <div class="w-[75%] flex flex-wrap flex-col gap-5 h-screen">
+    <div class="flex items-start gap-5 flex-wrap">
       <% products.forEach(function(product){ %>
-      <div class="w-60">
+      <div class="w-[30%]">
         <div
           class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]"
         >
@@ -44,7 +50,7 @@
           </div>
           <a
             class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
-            href=""
+            href="/add-to-cart/<%= product._id %>"
           >
             <i class="ri-add-line"></i>
           </a>

@@ -5,16 +5,20 @@ const Router = express.Router();
 
 Router.post("/create", upload.single("image"), async (req, res) => {
   try {
-    const { name, discount, bgColor, panelColor, textColor } = req.body;
+    const { name, price, discount, bgcolor, panelcolor, textcolor } = req.body;
+    console.log(name, price, discount, bgcolor, panelcolor, textcolor);
+
     const productCreated = await productModel.create({
       image: req.file.buffer,
-      name,
-      discount,
-      bgColor,
-      panelColor,
-      textColor,
+      name: name,
+      price: price,
+      discount: discount,
+      bgColor: bgcolor,
+      panelColor: panelcolor,
+      textColor: textcolor,
     });
-    res.send(productCreated);
+    req.flash("success", "Product Created Successfully");
+    res.redirect("/owners/admin");
   } catch (error) {
     console.log("productCreation error >>>", error);
   }
